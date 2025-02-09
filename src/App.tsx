@@ -1,12 +1,18 @@
+import Navbar from './components/navbar.component';
 import RouterProvider from './routes/routes';
 import { BrowserRouter } from 'react-router-dom';
 import { RoutesUrls } from './routes/routes.type';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './config/queryClient';
 
 function App() {
   return (
     <BrowserRouter basename={RoutesUrls.HOME}>
+      <Navbar />
       <div className="p-4">
-        <RouterProvider />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider />
+        </QueryClientProvider>
       </div>
     </BrowserRouter>
   );
