@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --view-height: 100vh;
+  --header-height: 70px;
+  --max-view-height: calc(var(--view-height) - var(--header-height));
+}
+
 @font-face {
   font-family: 'F1 Regular';
   src: url('/fonts/Formula1-Regular.otf') format('opentype');
@@ -23,9 +29,29 @@
   font-style: normal;
 }
 
-body {
+@font-face {
+  font-family: 'TitilliumLight';
+  src: url('/fonts/TitilliumWeb-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
   margin: 0;
+  padding: 0;
   min-height: 100vh;
   font-family: "F1 Regular";
-  letter-spacing: .0125rem;
+  letter-spacing: 0.0125rem;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+#root {
+  min-height: 100vh;
 }
