@@ -28,5 +28,18 @@
       }
     ],
     "quotes": ["error", "single", { "avoidEscape": true }]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@pages", "./src/pages"],
+          ["@components", "./src/components"],
+          ["@constants", "./src/constants"],
+          ["@typesApp", "./src/types"]
+        ],
+        "extensions": [".js", ".ts", ".jsx", ".tsx", ".json", ".webp"]
+      }
+    }
   }
 }
