@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Column, TableData } from '../types';
 
 interface DynamicTableProps<T> {
@@ -6,7 +6,7 @@ interface DynamicTableProps<T> {
   data: TableData<T>;
 }
 
-const DynamicTable = <T extends {}>({ data, columns }: DynamicTableProps<T>) => {
+const DynamicTable = <T extends object>({ data, columns }: DynamicTableProps<T>) => {
   return (
     <table className="table-auto -mx-10 md:mx-0">
       <thead className="bg-white border-b border-gray-200">

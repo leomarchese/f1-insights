@@ -1,4 +1,4 @@
-import { RaceResults } from '../../types';
+import { RaceResults, Results, Track } from '@typesApp';
 
 export interface Column<T> {
   header: string;
@@ -11,4 +11,8 @@ export type TableData<T> = T[];
 export interface RaceGroup {
   round: string;
   races: RaceResults[];
+}
+
+export interface RaceWinner extends Track {
+  driver: Results;
 }

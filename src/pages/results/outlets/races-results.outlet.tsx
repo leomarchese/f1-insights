@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { useParams } from 'react-router-dom';
@@ -34,7 +35,8 @@ const RacesResults: React.FC = () => {
   const isDetailed = id.toLowerCase() !== 'all';
 
   const flattenedRaces: RaceResults[] = racesQuery.data?.pages.flatMap((page) => page.RaceTable.Races) || [];
-  const displayedData = getDisplayedData(flattenedRaces, isDetailed, id);
+  const displayedData: any = getDisplayedData(flattenedRaces, isDetailed, id);
+  const columns: any = isDetailed ? RacesDetailedColumns : RacesSimpleColumns;
 
   const handleScroll = () => {
     if (racesQuery.hasNextPage && !racesQuery.isFetchingNextPage) {
@@ -49,7 +51,7 @@ const RacesResults: React.FC = () => {
         <BottomScrollListener onBottom={handleScroll} offset={300} triggerOnNoScroll={true}>
           <div className="bg-white p-10 flex flex-col gap-5">
             <h1 className="text-xl md:text-4xl self-center md:self-auto">{year} RACE RESULTS</h1>
-            <DynamicTable data={displayedData} columns={isDetailed ? RacesDetailedColumns : RacesSimpleColumns} />
+            <DynamicTable data={displayedData} columns={columns} />
             {racesQuery.isFetchingNextPage && <SkeletonList count={5} />}
           </div>
         </BottomScrollListener>

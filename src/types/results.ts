@@ -3,6 +3,7 @@ export interface Driver {
   givenName: string;
   familyName: string;
   nationality: string;
+  permanentNumber: string;
   team?: string;
   points?: number;
   code?: string;
