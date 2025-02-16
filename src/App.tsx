@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter basename={RoutesUrls.HOME}>
       <Navbar />
-      <div className="p-4">
+      <div className="min-h-[--max-view-height]">
         <QueryClientProvider client={queryClient}>
           <RouterProvider />
         </QueryClientProvider>
