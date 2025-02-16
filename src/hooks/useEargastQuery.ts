@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/hooks/useErgastQuery.ts
 import { useQuery } from '@tanstack/react-query';
 

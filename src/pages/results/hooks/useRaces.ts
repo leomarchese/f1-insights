@@ -7,12 +7,12 @@ export const useRacesInfinite = (year: string, additionalData: string, limit: nu
     queryKey: ['races', year, additionalData],
     queryFn: async ({ pageParam = 0 }) => {
       if (additionalData.toLowerCase() === 'all') {
-        return fetchRaceResults(year, pageParam, limit);
+        return fetchRaceResults(year, pageParam as number, limit);
       } else {
         return fetchRaceResultsByRound(year, additionalData);
       }
     },
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage) => {
       if (additionalData.toLowerCase() !== 'all') {
         return undefined;
       }

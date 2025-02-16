@@ -5,7 +5,7 @@ import Skeleton from '../../../components/skeleton.component';
 
 interface FilterGroupDetailsProps {
   title: string;
-  links: { label?: string; to?: string }[];
+  links: { label: string; to: string }[];
   containerClasses?: string;
   isLoading?: boolean;
 }
