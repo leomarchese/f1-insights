@@ -125,7 +125,9 @@ const Navbar: React.FC = () => {
                     onMouseLeave={handleMouseLeaveMenu}
                   >
                     <div
-                      className={`border-b border-r rounded-br-lg transition-colors duration-800 ${isActive && !isActiveSubmenu ? 'border-white' : 'border-transparent'}`}
+                      className={`border-b border-r rounded-br-lg transition-colors duration-800 ${
+                        isActive && !isActiveSubmenu ? 'border-white' : 'border-transparent'
+                      }`}
                     >
                       <Link
                         to={item.link}
@@ -175,7 +177,7 @@ const Navbar: React.FC = () => {
 
       {/* Menu Mobile */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-f1-red absolute w-full">
+        <div className="md:hidden bg-f1-red absolute w-full z-10">
           <ul className="px-2 pt-2 pb-3 space-y-1">
             {menuItems.map((item, index) => (
               <li key={index}>
