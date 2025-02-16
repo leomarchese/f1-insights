@@ -4,9 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Prefixamos com "f1" para facilitar o uso das classes (ex.: bg-f1-red)
         f1: {
-          red: '#E10600', // Vermelho principal (inspirado na identidade da F1)
+          red: '#E10600',
           black: '#000000',
           dark: '#111111',
           grey: '#67676d',
@@ -14,7 +13,12 @@ module.exports = {
           white: '#ffffff',
           hovers: '#15151e',
           mobileMenuBorder: '#f08380',
+          offWhite: '#f6f4f0',
+          'grey-10': '#f3f3f3',
         },
+      },
+      fontFamily: {
+        titillium: ['TitilliumLight'],
       },
     },
   },
