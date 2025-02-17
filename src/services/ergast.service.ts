@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Driver, MRData, Season, Track } from '../types';
 
-const BASE_URL = 'http://ergast.com/api/f1';
+const BASE_URL = 'https://ergast.com/api/f1';
 
 export const fetchSeasons = async (): Promise<Season[]> => {
   const response = await axios.get(`${BASE_URL}/seasons.json?limit=100`);
