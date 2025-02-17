@@ -4,6 +4,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/f1-insights',
   plugins: [react()],
   resolve: {
     alias: {
