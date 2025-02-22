@@ -49,8 +49,8 @@ const RacesResults: React.FC = () => {
       <FiltersComponent isLoading={isLoadingFilters} year={year} seasons={seasons} searchType={type} dynamicItems={dynamicItens} />
       {!racesQuery.isLoading && racesQuery.data ? (
         <BottomScrollListener onBottom={handleScroll} offset={300} triggerOnNoScroll={true}>
-          <div className="bg-white p-10 flex flex-col gap-5">
-            <h1 className="text-xl md:text-4xl self-center md:self-auto">{year} RACE RESULTS</h1>
+          <div className="bg-white p-10 flex flex-col">
+            <h1 className="text-xl md:text-4xl self-center md:self-auto pb-5">{year} RACE RESULTS</h1>
             <DynamicTable data={displayedData} columns={columns} />
             {racesQuery.isFetchingNextPage && <SkeletonList count={5} />}
           </div>

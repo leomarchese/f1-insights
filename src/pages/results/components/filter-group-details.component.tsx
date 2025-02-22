@@ -12,7 +12,7 @@ interface FilterGroupDetailsProps {
 
 const FilterGroupDetails: React.FC<FilterGroupDetailsProps> = ({ title, links, isLoading = false, containerClasses = '' }) => {
   if (isLoading) {
-    return <Skeleton width="w-full" height="h-[120px]" variant="box" />;
+    return <Skeleton width="w-full" height="h-[120px]" />;
   }
 
   return (
