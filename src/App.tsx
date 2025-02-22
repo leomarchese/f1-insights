@@ -1,5 +1,5 @@
 import Navbar from './components/navbar.component';
-import RouterProvider from './routes/routes';
+import RouterProvider from './routes/router';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './config/queryClient';

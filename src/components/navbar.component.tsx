@@ -2,64 +2,7 @@ import React, { useState } from 'react';
 import CustomBorderBox from './custom-border-box.component';
 import { IconChevronDown, IconChevronRight, IconClose, IconMenu } from './icons';
 import { Link, useLocation } from 'react-router-dom';
-import { ResultsRoutes, RoutesUrls } from '../routes/routes.type';
-
-const menuItems = [
-  {
-    label: 'Latest',
-    link: RoutesUrls.HOME,
-    submenu: [
-      { label: 'Latest', link: '#' },
-      { label: 'What is F1?', link: '#' },
-      { label: 'What is F1 TV?', link: '#' },
-      { label: 'Get involved', link: '#' },
-    ],
-  },
-  { label: 'Video', link: '/video' },
-  { label: 'F1 Unlocked', link: '/f1-unlocked' },
-  {
-    label: 'Schedule',
-    link: '/schedule',
-    submenu: [
-      { label: 'Schedule 1', link: '#' },
-      { label: 'Schedule 2', link: '#' },
-    ],
-  },
-  {
-    label: 'Results',
-    link: RoutesUrls.RESULTS,
-    submenu: [
-      { label: 'Races', link: ResultsRoutes.races('2024') },
-      { label: 'Drivers', link: ResultsRoutes.drivers('2024') },
-      { label: 'Teams', link: ResultsRoutes.teams('2024') },
-    ],
-  },
-  {
-    label: 'Drivers',
-    link: '/drivers',
-    submenu: [
-      { label: 'Drivers 1', link: '#' },
-      { label: 'Drivers 2', link: '#' },
-    ],
-  },
-  {
-    label: 'Teams',
-    link: '/teams',
-    submenu: [
-      { label: 'Teams 1', link: '#' },
-      { label: 'Teams 2', link: '#' },
-    ],
-  },
-  {
-    label: 'Gaming',
-    link: '/gaming',
-    submenu: [
-      { label: 'Gaming 1', link: '#' },
-      { label: 'Gaming 2', link: '#' },
-    ],
-  },
-  { label: 'Live Timing', link: '/live-timing' },
-];
+import menuItems from '../config/menu';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
