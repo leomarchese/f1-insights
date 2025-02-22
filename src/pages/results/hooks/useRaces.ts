@@ -1,19 +1,19 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { fetchRaceResults, fetchRaceResultsByRound, fetchTracks } from '../../../services/ergast.service';
-import { MRData } from '@typesApp';
+import { MRData, RaceTable } from '@typesApp';
 
-export const useRacesInfinite = (year: string, additionalData: string, limit: number = 100) => {
-  return useInfiniteQuery<MRData, Error>({
-    queryKey: ['races', year, additionalData],
+export const useRacesInfinite = (year: string, round: string, limit: number = 100) => {
+  return useInfiniteQuery<MRData<RaceTable>, Error>({
+    queryKey: ['races', year, round],
     queryFn: async ({ pageParam = 0 }) => {
-      if (additionalData.toLowerCase() === 'all') {
+      if (round.toLowerCase() === 'all') {
         return fetchRaceResults(year, pageParam as number, limit);
       } else {
-        return fetchRaceResultsByRound(year, additionalData);
+        return fetchRaceResultsByRound(year, round);
       }
     },
     getNextPageParam: (lastPage) => {
-      if (additionalData.toLowerCase() !== 'all') {
+      if (round.toLowerCase() !== 'all') {
         return undefined;
       }
       const currentOffset = Number(lastPage.offset);

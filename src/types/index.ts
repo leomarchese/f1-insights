@@ -1,2 +1,2 @@
 export * from './icons';
-export * from './results';
+export * from './ergast.types';

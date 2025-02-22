@@ -1,7 +1,8 @@
-import { RaceResults, Results, Track } from '@typesApp';
+// import { RaceResults, Results, Track } from '@typesApp';
+import { Race, RaceResult } from '@typesApp';
 import { RaceGroup, RaceWinner } from '../types';
 
-export const groupWinnersByRound = (races: RaceResults[]): RaceGroup[] => {
+export const groupWinnersByRound = (races: Race[]): RaceGroup[] => {
   const groups = races.reduce(
     (acc, race) => {
       const round = race.round;
@@ -11,25 +12,25 @@ export const groupWinnersByRound = (races: RaceResults[]): RaceGroup[] => {
       acc[round].push(race);
       return acc;
     },
-    {} as Record<string, RaceResults[]>,
+    {} as Record<string, Race[]>,
   );
 
   return Object.entries(groups).map(([round, races]) => ({ round, races }));
 };
 
-export const getDisplayedData = (races: RaceResults[], isDetailed: boolean, id: string): RaceWinner[] | Results[] => {
+export const getDisplayedData = (races: Race[], isDetailed: boolean, id: string): RaceWinner[] | RaceResult[] => {
   if (!isDetailed) {
     const groups: RaceGroup[] = groupWinnersByRound(races);
     return groups.map((group) => {
       const { Results, ...rest } = group.races[0];
-      return { ...rest, driver: Results[0] };
+      return { ...rest, winner: Results![0] };
     });
   } else {
-    return races.filter((race) => race.round === id).flatMap((race) => race.Results.map((result) => result));
+    return races.filter((race) => race.round === id).flatMap((race) => race.Results!.map((result) => result));
   }
 };
 
-export const formatDynamicItems = (year: string, data: Track[]) => {
+export const formatDynamicItems = (year: string, data: Race[]) => {
   const items = data.map((track) => ({
     id: track.Circuit.circuitId,
     label: track.Circuit.Location.country,

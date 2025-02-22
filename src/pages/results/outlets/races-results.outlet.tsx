@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { useParams } from 'react-router-dom';
 import { useRacesInfinite, useTracks } from '@pages/results/hooks/useRaces';
 import { RacesDetailedColumns, RacesSimpleColumns } from '@pages/results/configs/column-configs';
 import { DEFAULT_ID, DEFAULT_RACE_TYPE, DEFAULT_YEAR } from '@constants';
 import { formatDynamicItems, getDisplayedData } from '@pages/results/utils/races-results.utils';
-import { RaceResults, Track } from '@typesApp';
+import { Race } from '@typesApp';
 import useSeasons from '@pages/results/hooks/useSeasons';
 import FiltersComponent from '@pages/results/components/filters.component';
 import DynamicTable from '@pages/results/components/dynamic-table.component';
@@ -14,7 +13,7 @@ import SkeletonList from '@pages/results/components/skeleton-list.component';
 import Skeleton from '@components/skeleton.component';
 import { ResultsPageParams } from '../types';
 
-const RacesResults: React.FC = () => {
+const RacesResults = () => {
   const { year = DEFAULT_YEAR, id = DEFAULT_ID, type = DEFAULT_RACE_TYPE } = useParams<ResultsPageParams>();
   const seasons = useSeasons();
   const racesQuery = useRacesInfinite(year, id);
@@ -25,7 +24,7 @@ const RacesResults: React.FC = () => {
   const dynamicItems = !tracks.isLoading && tracks.data ? formatDynamicItems(year, tracks.data) : [];
   const isDetailed = id.toLowerCase() !== 'all';
 
-  const flattenedRaces: RaceResults[] = racesQuery.data?.pages.flatMap((page) => page.RaceTable.Races) || [];
+  const flattenedRaces: Race[] = racesQuery.data?.pages.flatMap((page) => page.RaceTable.Races) || [];
   const displayedData: any = getDisplayedData(flattenedRaces, isDetailed, id);
   const columns: any = isDetailed ? RacesDetailedColumns : RacesSimpleColumns;
 
