@@ -16,3 +16,9 @@ export interface RaceGroup {
 export interface RaceWinner extends Track {
   driver: Results;
 }
+
+export interface ResultsPageParams extends Record<string, string | undefined> {
+  id?: string;
+  year?: string;
+  type?: string;
+}

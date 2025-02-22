@@ -1,4 +1,4 @@
-import { RaceResults, Results } from '@typesApp';
+import { RaceResults, Results, Track } from '@typesApp';
 import { RaceGroup, RaceWinner } from '../types';
 
 export const groupWinnersByRound = (races: RaceResults[]): RaceGroup[] => {
@@ -27,4 +27,14 @@ export const getDisplayedData = (races: RaceResults[], isDetailed: boolean, id: 
   } else {
     return races.filter((race) => race.round === id).flatMap((race) => race.Results.map((result) => result));
   }
+};
+
+export const formatDynamicItems = (year: string, data: Track[]) => {
+  const items = data.map((track) => ({
+    id: track.Circuit.circuitId,
+    label: track.Circuit.Location.country,
+    to: `/results/${year}/races/${track.round}`,
+  }));
+
+  return [{ id: 'all', label: 'All', to: `/results/${year}/races/all` }, ...items];
 };

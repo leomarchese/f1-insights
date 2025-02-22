@@ -5,33 +5,24 @@ import { useParams } from 'react-router-dom';
 import { useRacesInfinite, useTracks } from '@pages/results/hooks/useRaces';
 import { RacesDetailedColumns, RacesSimpleColumns } from '@pages/results/configs/column-configs';
 import { DEFAULT_ID, DEFAULT_RACE_TYPE, DEFAULT_YEAR } from '@constants';
-import { getDisplayedData } from '@pages/results/utils/races-results.utils';
+import { formatDynamicItems, getDisplayedData } from '@pages/results/utils/races-results.utils';
 import { RaceResults, Track } from '@typesApp';
 import useSeasons from '@pages/results/hooks/useSeasons';
 import FiltersComponent from '@pages/results/components/filters.component';
 import DynamicTable from '@pages/results/components/dynamic-table.component';
 import SkeletonList from '@pages/results/components/skeleton-list.component';
 import Skeleton from '@components/skeleton.component';
+import { ResultsPageParams } from '../types';
 
 const RacesResults: React.FC = () => {
-  const { year = DEFAULT_YEAR, id = DEFAULT_ID, type = DEFAULT_RACE_TYPE } = useParams<{ year: string; id: string; type: string }>();
+  const { year = DEFAULT_YEAR, id = DEFAULT_ID, type = DEFAULT_RACE_TYPE } = useParams<ResultsPageParams>();
   const seasons = useSeasons();
   const racesQuery = useRacesInfinite(year, id);
   const tracks = useTracks(year);
 
   const isLoadingFilters = seasons.isLoading || tracks.isLoading;
 
-  const formatDynamicItens = (data: Track[]) => {
-    const items = data.map((track) => ({
-      id: track.Circuit.circuitId,
-      label: track.Circuit.Location.country,
-      to: `/results/${year}/races/${track.round}`,
-    }));
-
-    return [{ id: 'all', label: 'All', to: `/results/${year}/races/all` }, ...items];
-  };
-
-  const dynamicItens = !tracks.isLoading && tracks.data ? formatDynamicItens(tracks.data) : [];
+  const dynamicItems = !tracks.isLoading && tracks.data ? formatDynamicItems(year, tracks.data) : [];
   const isDetailed = id.toLowerCase() !== 'all';
 
   const flattenedRaces: RaceResults[] = racesQuery.data?.pages.flatMap((page) => page.RaceTable.Races) || [];
@@ -46,7 +37,7 @@ const RacesResults: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-[2px]">
-      <FiltersComponent isLoading={isLoadingFilters} year={year} seasons={seasons} searchType={type} dynamicItems={dynamicItens} />
+      <FiltersComponent isLoading={isLoadingFilters} year={year} seasons={seasons} searchType={type} dynamicItems={dynamicItems} />
       {!racesQuery.isLoading && racesQuery.data ? (
         <BottomScrollListener onBottom={handleScroll} offset={300} triggerOnNoScroll={true}>
           <div className="bg-white p-10 flex flex-col">
