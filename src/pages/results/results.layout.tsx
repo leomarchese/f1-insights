@@ -7,7 +7,7 @@ const ResultsLayout: React.FC = () => {
     <MainLayout backgroundColor="bg-[#f6f4f0]">
       <div className="grid gap-5">
         <div className="h-[90px]"></div>
-        <div className="h-full">
+        <div className="h-full overflow-x-auto">
           <Outlet />
         </div>
       </div>

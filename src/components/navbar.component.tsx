@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-f1-red text-white relative">
+    <nav className="bg-f1-red text-white fixed left-0 right-0 z-20">
       <div className="max-w-7xl mx-auto px-[10px]">
         <div className="grid grid-flow-col items-center h-[70px] md:justify-center">
           {/* Botão Mobile */}
@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
 
       {/* Menu Mobile */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-f1-red absolute w-full z-10">
+        <div className="md:hidden bg-f1-red absolute w-full">
           <ul className="px-2 pt-2 pb-3 space-y-1">
             {menuItems.map((item, index) => (
               <li key={index}>

@@ -17,7 +17,7 @@ const FilterGroupDetails: React.FC<FilterGroupDetailsProps> = ({ title, links, i
 
   return (
     <details open className={`group bg-white ${containerClasses}`}>
-      <summary className="md:hidden cursor-pointer font-normal p-5 border-b border-gray-300 list-none flex justify-between items-center">
+      <summary className="md:hidden cursor-pointer font-normal p-5 border-b border-gray-300 list-none flex justify-between items-center [&::-webkit-details-marker]:hidden">
         <span>{title}</span>
         <IconChevronDown className="w-5 h-5 transition-transform duration-200 group-open:rotate-180" />
       </summary>
