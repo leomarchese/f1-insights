@@ -9,7 +9,7 @@ export interface SkeletonProps {
   variant?: SkeletonVariant;
 }
 
-const Skeleton: React.FC<SkeletonProps> = ({ width = 'w-full', height = 'h-4', className = '', variant = 'rounded-none' }) => {
+const Skeleton: React.FC<SkeletonProps> = ({ width = 'w-full', height = 'h-4', className = '', variant = 'square' }) => {
   const variantClasses = {
     box: 'rounded-md',
     text: 'rounded',
