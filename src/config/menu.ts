@@ -1,4 +1,4 @@
-import { ResultsRoutes, RoutesUrls } from '../routes/routes.type';
+import { MenuItem, ResultsRoutes, RoutesUrls } from '../routes/routes.type';
 
 export default [
   {
@@ -55,4 +55,4 @@ export default [
     ],
   },
   { label: 'Live Timing', link: '/live-timing' },
-];
+] as MenuItem[];

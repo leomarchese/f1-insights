@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import CustomBorderBox from './custom-border-box.component';
 import { IconChevronDown, IconChevronRight, IconClose, IconMenu } from './icons';
 import { Link, useLocation } from 'react-router-dom';
+import { MenuItem } from '../routes/routes.type';
 import menuItems from '../config/menu';
 
 const Navbar: React.FC = () => {
@@ -9,27 +10,39 @@ const Navbar: React.FC = () => {
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const [menuHovered, setMenuHovered] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const memoizedMenuItems = useMemo(() => menuItems, []);
 
-  const handleMouseEnterMenu = (index: number) => {
+  const handleMouseEnterMenu = useCallback((index: number) => {
     setActiveSubmenu(index);
     setMenuHovered(true);
-  };
+  }, []);
 
-  const handleMouseLeaveMenu = () => {
+  const handleMouseLeaveMenu = useCallback(() => {
     if (!menuHovered) {
       setActiveSubmenu(null);
     }
-  };
+  }, [menuHovered]);
 
-  const handleMouseLeaveSubmenu = () => {
+  const handleMouseLeaveSubmenu = useCallback(() => {
     setMenuHovered(false);
     setActiveSubmenu(null);
-  };
+  }, []);
 
-  const handleCloseMenu = () => {
+  const handleCloseMenu = useCallback(() => {
     setMobileMenuOpen(false);
     setActiveSubmenu(null);
-  };
+  }, []);
+
+  const isRouteActive = useMemo(() => {
+    return (item: MenuItem) => {
+      if (item.submenu && item.link !== '/') {
+        const routePrefix = item.link.split('/')[1];
+        return location.pathname.startsWith(`/${routePrefix}`);
+      }
+
+      return item.link === '/' ? location.pathname === '/' : location.pathname.startsWith(item.link);
+    };
+  }, [location.pathname]);
 
   return (
     <nav className="bg-f1-red text-white fixed top-0 left-0 right-0 z-20">
@@ -55,9 +68,7 @@ const Navbar: React.FC = () => {
           {/* Menu Desktop */}
           <div className="hidden md:block h-full">
             <ul className="flex h-full">
-              {menuItems.map((item, index) => {
-                const isActive = item.link === '/' ? location.pathname === '/' : location.pathname.startsWith(item.link);
-
+              {memoizedMenuItems.map((item, index) => {
                 const isActiveSubmenu = activeSubmenu === index;
 
                 return (
@@ -69,7 +80,7 @@ const Navbar: React.FC = () => {
                   >
                     <div
                       className={`border-b border-r rounded-br-lg transition-colors duration-800 ${
-                        isActive && !isActiveSubmenu ? 'border-white' : 'border-transparent'
+                        isRouteActive(item) && !isActiveSubmenu ? 'border-white' : 'border-transparent'
                       }`}
                     >
                       <Link

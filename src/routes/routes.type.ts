@@ -1,3 +1,14 @@
+export interface SubMenuItem {
+  label: string;
+  link: string;
+}
+
+export interface MenuItem {
+  label: string;
+  link: RoutesUrls;
+  submenu?: SubMenuItem[];
+}
+
 export enum RoutesUrls {
   BASE_PATH = 'f1-insights',
   HOME = '/',
