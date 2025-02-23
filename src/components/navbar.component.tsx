@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-f1-red text-white fixed left-0 right-0 z-20">
+    <nav className="bg-f1-red text-white fixed top-0 left-0 right-0 z-20">
       <div className="max-w-7xl mx-auto px-[10px]">
         <div className="grid grid-flow-col items-center h-[70px] md:justify-center">
           {/* Botão Mobile */}

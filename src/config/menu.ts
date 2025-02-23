@@ -23,7 +23,7 @@ export default [
   },
   {
     label: 'Results',
-    link: RoutesUrls.RESULTS,
+    link: ResultsRoutes.races('2024'),
     submenu: [
       { label: 'Races', link: ResultsRoutes.races('2024') },
       { label: 'Drivers', link: ResultsRoutes.drivers('2024') },

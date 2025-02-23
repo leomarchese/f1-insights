@@ -29,14 +29,26 @@ const FiltersComponent: React.FC<FiltersComponentProps> = ({ isLoading = true, y
   return (
     <div className={`grid grid-cols-1 md:grid-cols-3 gap-2 ${isLoading ? 'gap-2' : 'md:gap-0'}`}>
       {/* Grupo 1: Season */}
-      <FilterGroupDetails title="SEASON" links={seasonLinks} isLoading={isLoading} />
+      <FilterGroupDetails title="SEASON" links={seasonLinks} isLoading={isLoading} groupType="season" />
 
       {/* Grupo 2: Categories */}
-      <FilterGroupDetails title="CATEGORIES" links={categoriesLinks} isLoading={isLoading} containerClasses="md:border-l md:border-[#e5e7eb]" />
+      <FilterGroupDetails
+        title="CATEGORIES"
+        links={categoriesLinks}
+        isLoading={isLoading}
+        groupType="categories"
+        containerClasses="md:border-l md:border-[#e5e7eb]"
+      />
 
       {/* Grupo 3: Additional Data (apenas se dynamicItems estiver definido) */}
       {dynamicItems && (
-        <FilterGroupDetails title="RESULTS" links={dynamicItems} isLoading={isLoading} containerClasses="md:border-l md:border-[#e5e7eb]" />
+        <FilterGroupDetails
+          title="RESULTS"
+          links={dynamicItems}
+          isLoading={isLoading}
+          groupType="additional"
+          containerClasses="md:border-l md:border-[#e5e7eb]"
+        />
       )}
     </div>
   );

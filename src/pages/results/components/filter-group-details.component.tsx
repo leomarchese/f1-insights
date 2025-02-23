@@ -1,16 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { IconChevronDown } from '../../../components/icons';
+import { usePathParts } from '../../../hooks/usePathParts';
+import { isFilterActive } from '../utils/common.utils';
 import Skeleton from '../../../components/skeleton.component';
 
 interface FilterGroupDetailsProps {
   title: string;
   links: { label: string; to: string }[];
+  groupType: 'season' | 'categories' | 'additional';
   containerClasses?: string;
   isLoading?: boolean;
 }
 
-const FilterGroupDetails: React.FC<FilterGroupDetailsProps> = ({ title, links, isLoading = false, containerClasses = '' }) => {
+const FilterGroupDetails: React.FC<FilterGroupDetailsProps> = ({ title, links, groupType, isLoading = false, containerClasses = '' }) => {
+  const currentParts = usePathParts();
+
   if (isLoading) {
     return <Skeleton width="w-full" height="h-[120px]" />;
   }
@@ -24,10 +29,10 @@ const FilterGroupDetails: React.FC<FilterGroupDetailsProps> = ({ title, links, i
       <div>
         <ul className="p-5 max-h-[7.5em] overflow-y-auto flex flex-col gap-1 max-md:bg-f1-offWhite">
           {links.map((link, i) => (
-            <li key={i} className="min-h-8">
-              <Link to={link.to} className="block hover:bg-gray-100 rounded-md transition-colors">
+            <li key={i} className={`min-h-8 ${isFilterActive(link.to, groupType, currentParts) ? 'font-bold underline underline-offset-4' : ''}`}>
+              <NavLink to={link.to} end className="block p-2">
                 {link.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>

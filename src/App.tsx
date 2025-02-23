@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter basename="/f1-insights">
       <Navbar />
-      <div className="min-h-[--max-view-height]">
+      <div className="min-h-[--max-view-height] relative top-[--header-height]">
         <QueryClientProvider client={queryClient}>
           <RouterProvider />
         </QueryClientProvider>
