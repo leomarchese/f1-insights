@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from 'react-router-dom';
 import { ResultsPageParams } from '../types';
-import { DEFAULT_ID, DEFAULT_RACE_TYPE, DEFAULT_YEAR } from '@constants';
-import { useDriverData, useDrivers } from '@pages/results/hooks/useDrivers';
+import { DEFAULT_ID, DEFAULT_DRIVERS_TYPE, DEFAULT_YEAR } from '@constants';
+import { useDriverData, useDrivers } from '@pages/results/hooks/drivers.hooks';
 import { DriverResults, DriversStanding } from '../configs/column-configs';
 import { formatDynamicItems } from '../utils/drivers-results.utils';
 import FiltersComponent from '@pages/results/components/filters.component';
@@ -13,7 +13,7 @@ import Skeleton from '@components/skeleton.component';
 import { DriverStanding, RaceTable } from '@typesApp';
 
 const DriversResults = () => {
-  const { year = DEFAULT_YEAR, id = DEFAULT_ID, type = DEFAULT_RACE_TYPE } = useParams<ResultsPageParams>();
+  const { year = DEFAULT_YEAR, id = DEFAULT_ID, type = DEFAULT_DRIVERS_TYPE } = useParams<ResultsPageParams>();
   const seasons = useSeasons();
   const rawDrivers = useDriverData(year, id);
   const driversData = rawDrivers.data;
@@ -34,6 +34,7 @@ const DriversResults = () => {
   return (
     <div className="flex flex-col gap-[2px]">
       <FiltersComponent isLoading={isLoadingFilters} year={year} seasons={seasons} searchType={type} dynamicItems={dynamicItems} />
+
       {!rawDrivers.isLoading && rawDrivers.data ? (
         <div className="bg-white p-10 flex flex-col overflow-x-auto">
           <h1 className="text-xl md:text-4xl self-center md:self-auto pb-5">{year} DRIVER STANDINGS</h1>

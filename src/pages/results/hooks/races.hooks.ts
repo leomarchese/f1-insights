@@ -31,6 +31,5 @@ export const useTracks = (year: string) => {
     queryKey: ['tracks', year],
     queryFn: () => fetchTracks(year),
     enabled: !!year,
-    staleTime: 1000 * 60 * 60,
   });
 };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { useParams } from 'react-router-dom';
-import { useRacesInfinite, useTracks } from '@pages/results/hooks/useRaces';
+import { useRacesInfinite, useTracks } from '@pages/results/hooks/races.hooks';
 import { RacesDetailedColumns, RacesSimpleColumns } from '@pages/results/configs/column-configs';
 import { DEFAULT_ID, DEFAULT_RACE_TYPE, DEFAULT_YEAR } from '@constants';
 import { formatDynamicItems, getDisplayedData } from '@pages/results/utils/races-results.utils';
@@ -37,6 +37,7 @@ const RacesResults = () => {
   return (
     <div className="flex flex-col gap-[2px]">
       <FiltersComponent isLoading={isLoadingFilters} year={year} seasons={seasons} searchType={type} dynamicItems={dynamicItems} />
+
       {!racesQuery.isLoading && racesQuery.data ? (
         <BottomScrollListener onBottom={handleScroll} offset={300} triggerOnNoScroll={true}>
           <div className="bg-white p-10 flex flex-col">

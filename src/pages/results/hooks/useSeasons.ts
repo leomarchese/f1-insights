@@ -5,7 +5,6 @@ const useSeasons = () => {
   return useQuery({
     queryKey: ['seasons'],
     queryFn: fetchSeasons,
-    staleTime: 1000 * 60 * 60, // 1 hora de cache
   });
 };
 

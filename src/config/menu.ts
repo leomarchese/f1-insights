@@ -27,7 +27,7 @@ export default [
     submenu: [
       { label: 'Races', link: ResultsRoutes.races('2024') },
       { label: 'Drivers', link: ResultsRoutes.drivers('2024') },
-      { label: 'Teams', link: ResultsRoutes.teams('2024') },
+      { label: 'Constructor Standings', link: ResultsRoutes.teams('2024') },
     ],
   },
   {

@@ -1,10 +1,21 @@
 import { Column, RaceWinner } from '../types';
-import { DriverStanding, Race, RaceResult } from '@typesApp';
+import { ConstructorStanding, DriverStanding, Race, RaceResult } from '@typesApp';
 import { formatDate } from '../../../utils/date';
 import DriverCell from '../components/driver-cell.component';
 
 const getRacePosition = (driverResult: RaceResult) => {
   return driverResult.status !== 'Finished' && isNaN(Number(driverResult.positionText)) ? driverResult.status : driverResult.position;
+};
+
+const formatTeamPoints = (team: Race) => {
+  try {
+    const driver1Points = team.Results![0]?.points || '0';
+    const driver2Points = team.Results![1]?.points || '0';
+
+    return parseInt(driver1Points) + parseInt(driver2Points);
+  } catch {
+    return 'Unavailable';
+  }
 };
 
 export const RacesSimpleColumns: Column<RaceWinner>[] = [
@@ -40,4 +51,17 @@ export const DriverResults: Column<Race>[] = [
   { header: 'CAR', accessor: (row) => row.Results![0].Constructor.name },
   { header: 'RACE POSITION', accessor: (row) => getRacePosition(row.Results![0]) },
   { header: 'PTS', accessor: (row) => row.Results![0].points },
+];
+
+export const ConstructorStandings: Column<ConstructorStanding>[] = [
+  { header: 'POS', accessor: (row) => row.position },
+  { header: 'TEAM', accessor: (row) => row.Constructor.name },
+  { header: 'PTS', accessor: (row) => row.points },
+  { header: 'WINS', accessor: (row) => row.wins },
+];
+
+export const TeamResults: Column<Race>[] = [
+  { header: 'GRAND PRIX', accessor: (row) => row.raceName },
+  { header: 'DATE', accessor: (row) => formatDate(row.date, row.time!) },
+  { header: 'PTS', accessor: (row) => formatTeamPoints(row) },
 ];

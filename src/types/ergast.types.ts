@@ -47,6 +47,7 @@ export interface Season {
 export interface RaceTable {
   season: string;
   round?: string;
+  constructorId?: string;
   Races: Race[];
 }
 

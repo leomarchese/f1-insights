@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DriverStanding, DriverTable, MRData, Race, RaceTable, Season } from '@typesApp';
+import { Constructor, ConstructorStanding, DriverStanding, DriverTable, MRData, Race, RaceTable, Season, StandingsTable } from '@typesApp';
 
 const BASE_URL = 'https://ergast.com/api/f1';
 
@@ -48,12 +48,22 @@ export const fetchDrivers = async (year: string): Promise<DriverTable> => {
   return response.data.MRData.DriverTable;
 };
 
-export const fetchConstructorStandings = async (year: string) => {
+export const fetchConstructors = async (year: string): Promise<Constructor[]> => {
+  const response = await axios.get(`${BASE_URL}/${year}/constructors.json`);
+  return response.data.MRData.ConstructorTable.Constructors;
+};
+
+export const fetchConstructorStandings = async (year: string): Promise<ConstructorStanding[]> => {
   const response = await axios.get(`${BASE_URL}/${year}/constructorStandings.json`);
   return response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
 };
 
-export const fetchConstructorResults = async (year: string, constructorId: string) => {
-  const response = await axios.get(`${BASE_URL}/${year}/constructors/${constructorId}/results.json`);
+export const fetchConstructorResults = async (year: string, constructorId: string, offset = 0, limit = 100): Promise<Race[]> => {
+  const response = await axios.get(`${BASE_URL}/${year}/constructors/${constructorId}/results.json`, {
+    params: {
+      limit,
+      offset,
+    },
+  });
   return response.data.MRData.RaceTable.Races;
 };
