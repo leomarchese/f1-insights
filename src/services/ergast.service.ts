@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Constructor, ConstructorStanding, DriverStanding, DriverTable, MRData, Race, RaceTable, Season, StandingsTable } from '@typesApp';
+import { Constructor, ConstructorStanding, DriverStanding, DriverTable, MRData, Race, RaceTable, Season } from '@typesApp';
 
 const BASE_URL = 'https://ergast.com/api/f1';
 
